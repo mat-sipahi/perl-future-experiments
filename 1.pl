@@ -1,8 +1,20 @@
- use feature qw(say);
+use feature qw(say);
 use Future;
-use Data::Dumper;
 
-$future = Future->new->on_done(sub { say "Done @_"});
+my $future = Future->new;
+$future->on_done(sub { say @_;});
+
 say 'created';
 sleep(1);
-$future->done("MESSAGE");
+
+$future->done("DONE");
+
+
+
+$future = Future->new;
+$future->on_fail(sub { say @_;});
+
+say 'created';
+sleep(1);
+
+$future->fail("FAILED");
