@@ -37,4 +37,4 @@ my $combined_future = Future->wait_all($future1, $future2)->then(sub {
 
 say 'Fututes Combined';
 
-say $combined_future->get;
+#say $combined_future->get;

@@ -13,10 +13,10 @@ sub count{
     }
 }
 
-my $future = Future->call( sub{ return Future->done(3)})
-                ->then(sub {count(shift); return Future->done(2)})
-                ->then(sub {count(shift); return Future->done});
-say 'Created';
-$future->get;
+my $future = Future->call( sub{ return Future->done(-1)})
+                ->then(sub {count(shift); return Future->done(4)})
+                ->else(sub {say "Error Caught: @_"; return Future->done(5)});
+say $future->get;
+
 
 
