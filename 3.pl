@@ -57,3 +57,11 @@ say ' ---------- timeout ---------';
 #say Future->wait_any($future, $loop->timeout_future(after => 3))
 #    ->else(sub { return Future->done("FAILED WTIH: ".shift) })
 #    ->get;
+
+say '---------- fmap_void ---------';
+my $done_f = Future::Utils::fmap_void {
+   my $item = shift;
+   count("FMAP $item", $item);
+} foreach => [3..10], concurrent => 10;
+
+$done_f->get;
